@@ -8,7 +8,7 @@ xorg-xinit
 xterm
 binutils
 dosfstools
-linux-headers
+linux-zen-headers
 noto-fonts-emoji
 usbutils
 xdg-user-dirs
@@ -51,6 +51,7 @@ grub-customizer
 gst-libav
 gst-plugins-good
 gst-plugins-ugly
+gvfs-mtp
 haveged
 htop
 jdk-openjdk
@@ -62,6 +63,7 @@ lutris
 lzop
 m4
 make
+mtpfs
 neofetch
 ntfs-3g
 ntp
@@ -71,7 +73,11 @@ os-prober
 p7zip
 papirus-icon-theme
 patch
-picom
+pipewire
+pipewire-alsa
+pipewire-pulse
+pipewire-jack
+pipewire-audio
 pkgconf
 powerline-fonts
 pulseaudio
@@ -103,5 +109,3 @@ wine-mono
 winetricks
 zip
 zsh
-zsh-syntax-highlighting
-zsh-autosuggestions

@@ -76,7 +76,9 @@ echo -ne "
 createsubvolumes () {
     btrfs subvolume create /mnt/@
     btrfs subvolume create /mnt/@home
-    btrfs subvolume create /mnt/@var
+    btrfs subvolume create /mnt/@cache
+    btrfs subvolume create /mnt/@log
+    btrfs subvolume create /mnt/@images
     btrfs subvolume create /mnt/@tmp
     btrfs subvolume create /mnt/@.snapshots
 }
@@ -85,7 +87,9 @@ createsubvolumes () {
 mountallsubvol () {
     mount -o ${MOUNT_OPTIONS},subvol=@home ${partition3} /mnt/home
     mount -o ${MOUNT_OPTIONS},subvol=@tmp ${partition3} /mnt/tmp
-    mount -o ${MOUNT_OPTIONS},subvol=@var ${partition3} /mnt/var
+    mount -o ${MOUNT_OPTIONS},subvol=@cache ${partition3} /mnt/var/cache
+    mount -o ${MOUNT_OPTIONS},subvol=@log ${partition3} /mnt/var/log
+    mount -o ${MOUNT_OPTIONS},subvol=@images ${partition3} /mnt/var/lib/libvrt/images
     mount -o ${MOUNT_OPTIONS},subvol=@.snapshots ${partition3} /mnt/.snapshots
 }
 
@@ -98,7 +102,7 @@ subvolumesetup () {
 # mount @ subvolume
     mount -o ${MOUNT_OPTIONS},subvol=@ ${partition3} /mnt
 # make directories home, .snapshots, var, tmp
-    mkdir -p /mnt/{home,var,tmp,.snapshots}
+    mkdir -p /mnt/{home,tmp,.snapshots,var/{cache,log,lib/libvrt/iamges}}
 # mount subvolumes
     mountallsubvol
 }
@@ -151,7 +155,7 @@ echo -ne "
                     Arch Install on Main Drive
 -------------------------------------------------------------------------
 "
-pacstrap /mnt base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget libnewt --noconfirm --needed
+pacstrap /mnt base base-devel linux-zen linux-firmware vim nano sudo archlinux-keyring wget libnewt --noconfirm --needed
 echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
 cp -R ${SCRIPT_DIR} /mnt/root/ArchTitus
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
